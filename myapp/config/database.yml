@@ -1,3 +1,4 @@
+# config/database.yml
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -11,4 +12,11 @@ test:
   <<: *default
 
 production:
-  <<: *default
+  primary: &primary_production
+    <<: *default
+  cache:
+    <<: *primary_production
+  queue:
+    <<: *primary_production
+  cable:
+    <<: *primary_production
