@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    # Use dev locally. (This overrides Dockerfile’s default production env)
+    environment:
+      RAILS_ENV: ${RAILS_ENV}
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/rails
+    # Optional: ensure Rails binds to 0.0.0.0 in dev
+    command: ./bin/rails server -b 0.0.0.0 -p 3000
